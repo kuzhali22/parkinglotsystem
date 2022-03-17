@@ -1,37 +1,39 @@
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ParkingLotTest {
 
     @Test
-    void shouldBeAbleToParkTheCar() throws ParkingLotFullException, CarAlreadyParkedException {
+    void shouldBeAbleToParkTheCar() throws ParkingLotFullException, VehicleAlreadyParkedException {
 
         ParkingLot parkingLot = new ParkingLot(1);
         Car car = new Car();
 
         parkingLot.park(car);
 
-        assertTrue(parkingLot.isCarParkedAlready(car));
+        assertTrue(parkingLot.isVehicleParkedAlready(car));
 
     }
 
     @Test
-    void shouldNotBeAbleToParkTheCarIfCapacityIsZero() throws ParkingLotFullException, CarAlreadyParkedException {
-        ParkingLot parkingLot = new ParkingLot(0);
+    void shouldNotBeAbleToParkTheCarIfCapacityIsZero() throws ParkingLotFullException, VehicleAlreadyParkedException {
+        ParkingLot parkingLot = new ParkingLot(1);
         Car car = new Car();
+        Car denyCar = new Car();
+        parkingLot.park(car);
 
-        assertThrows(ParkingLotFullException.class, () -> parkingLot.park(car));
+        assertThrows(ParkingLotFullException.class, () -> parkingLot.park(denyCar));
 
     }
 
     @Test
-    void shouldNotBeAbleToParkTheSameCarMoreThanOnce() throws ParkingLotFullException, CarAlreadyParkedException {
+    void shouldNotBeAbleToParkTheSameCarMoreThanOnce() throws ParkingLotFullException, VehicleAlreadyParkedException {
         ParkingLot parkingLot = new ParkingLot(2);
         Car car = new Car();
         parkingLot.park(car);
 
-        assertThrows(CarAlreadyParkedException.class, () -> parkingLot.park(car));
+        assertThrows(VehicleAlreadyParkedException.class, () -> parkingLot.park(car));
 
     }
+
 }
