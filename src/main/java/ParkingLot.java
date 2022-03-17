@@ -1,20 +1,35 @@
+import java.util.ArrayList;
+
 public class ParkingLot {
 
 
-    private final int totalSlot = 1;
-    private int availableSlots = totalSlot;
+    private int availableSlots;
+    private int totalSlots;
+    private ArrayList<Car> parkedCars = new ArrayList<Car>();
 
-    public ParkingLot() {
-
+    public ParkingLot(int totalSlots) {
+        this.totalSlots = totalSlots;
+        this.availableSlots = totalSlots;
     }
 
     public boolean park(Car car) {
 
-        if (availableSlots > 0 && !car.isParked) {
+        if (isSlotAvailable() && isCarParkedAlready(car)) {
+
             availableSlots = availableSlots - 1;
-            car.isParked = true;
+            parkedCars.add(car);
             return true;
         }
         return false;
+
     }
+
+    private boolean isCarParkedAlready(Car car) {
+        return !parkedCars.contains(car);
+    }
+
+    private boolean isSlotAvailable() {
+        return availableSlots > 0;
+    }
+
 }

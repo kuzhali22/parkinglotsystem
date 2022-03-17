@@ -1,4 +1,3 @@
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -8,8 +7,8 @@ public class ParkingLotTest {
     @Test
     void shouldBeAbleToParkTheCar() {
 
-        ParkingLot parkingLot = new ParkingLot();
-        Car car = new Car(false);
+        ParkingLot parkingLot = new ParkingLot(1);
+        Car car = new Car();
 
         boolean parkingStatus = parkingLot.park(car);
 
@@ -19,23 +18,22 @@ public class ParkingLotTest {
 
     @Test
     void shouldNotBeAbleToParkTheCarIfCapacityIsZero() {
-        ParkingLot parkingLot = new ParkingLot();
-        Car car1 = new Car(false);
-        Car car2 = new Car(false);
+        ParkingLot parkingLot = new ParkingLot(0);
+        Car car = new Car();
 
-        boolean parkingStatus1 = parkingLot.park(car1);
-        boolean parkingStatus2 = parkingLot.park(car2);
+        boolean parkingStatus = parkingLot.park(car);
 
-        assertFalse(parkingStatus2);
+        assertFalse(parkingStatus);
 
     }
 
     @Test
     void shouldNotBeAbleToParkTheSameCarMoreThanOnce() {
-        ParkingLot parkingLot = new ParkingLot();
-        Car car1 = new Car(true);
+        ParkingLot parkingLot = new ParkingLot(1);
+        Car car = new Car();
 
-        boolean parkingStatus = parkingLot.park(car1);
+        parkingLot.park(car);
+        boolean parkingStatus = parkingLot.park(car);
 
         assertFalse(parkingStatus);
 
