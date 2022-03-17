@@ -30,4 +30,14 @@ public class ParkingLotTest {
 
     }
 
+    @Test
+    void shouldNotBeAbleToParkTheSameCarMoreThanOnce() {
+        ParkingLot parkingLot = new ParkingLot();
+        Car car1 = new Car(true);
+
+        boolean parkingStatus = parkingLot.park(car1);
+
+        assertFalse(parkingStatus);
+
+    }
 }
