@@ -1,16 +1,33 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParkingLotTest {
 
     @Test
-    void shouldFindParkingSuccessful() {
+    void shouldBeAbleToParkTheCar() {
 
-        ParkingLot parkingLot = new ParkingLot(1);
+        ParkingLot parkingLot = new ParkingLot();
+        Car car = new Car(false);
 
-        boolean isSuccessful = parkingLot.checkParkingSuccessful();
+        boolean parkingStatus = parkingLot.park(car);
 
-        Assertions.assertTrue(isSuccessful);
+        assertTrue(parkingStatus);
 
     }
+
+    @Test
+    void shouldNotBeAbleToParkTheCarIfCapacityIsZero() {
+        ParkingLot parkingLot = new ParkingLot();
+        Car car1 = new Car(false);
+        Car car2 = new Car(false);
+
+        boolean parkingStatus1 = parkingLot.park(car1);
+        boolean parkingStatus2 = parkingLot.park(car2);
+
+        assertFalse(parkingStatus2);
+
+    }
+
 }
